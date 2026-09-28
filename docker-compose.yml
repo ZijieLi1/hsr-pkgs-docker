@@ -1,0 +1,31 @@
+# HSR packages on ROS 2 Humble. Same DDS as conceptgraph: Cyclone, domain 96.
+#
+#   docker compose up -d
+#   docker compose exec hsr bash
+#   docker compose down
+
+services:
+  hsr:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hsr-pkgs:humble
+    hostname: hsr
+    working_dir: /ws
+    network_mode: host
+    ipc: host
+    stdin_open: true
+    tty: true
+    environment:
+      DISPLAY: ${DISPLAY}
+      QT_X11_NO_MITSHM: "1"
+      ROS_DOMAIN_ID: "96"
+      RMW_IMPLEMENTATION: rmw_cyclonedds_cpp
+      CYCLONEDDS_URI: file:///ws/docker/cyclonedds_profile.xml
+      BASH_ENV: /ws/docker/env.sh
+    volumes:
+      - .:/ws
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ${HOME}/.Xauthority:/root/.Xauthority:ro
+    entrypoint: ["/ws/docker/entrypoint.sh"]
+    command: ["sleep", "infinity"]

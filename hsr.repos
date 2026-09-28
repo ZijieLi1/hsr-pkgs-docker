@@ -1,0 +1,14 @@
+# Upstream HSR packages. Not committed — fetched by setup.sh / vcs import.
+repositories:
+  hsrb_common:
+    type: git
+    url: https://github.com/hsr-project/hsrb_common.git
+    version: humble
+  hsrb_rosnav:
+    type: git
+    url: https://github.com/hsr-project/hsrb_rosnav.git
+    version: humble
+  tmc_database:
+    type: git
+    url: https://github.com/hsr-project/tmc_database.git
+    version: humble
